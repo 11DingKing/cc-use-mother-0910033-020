@@ -1,0 +1,6 @@
+[project]
+name = "domain-contract-0910033-020"
+version = "0.1.0"
+description = "多仓库存调拨的领域约定与校验工具"
+requires-python = ">=3.11"
+dependencies = []
