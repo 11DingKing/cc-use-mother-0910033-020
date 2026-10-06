@@ -36,5 +36,17 @@
   "tags": [
     "warehouse-transfer",
     "in-transit-ledger"
-  ]
+  ],
+  "backend": {
+    "module": "transfer_backend",
+    "entry": "transfer_backend.app:app",
+    "run_command": "python3 tools/run_server.py",
+    "test_command": "python3 -m unittest discover -s tests -v",
+    "invariant_implementation": {
+      "跨仓批次守恒": "ledger.py 双式分录 + GET /api/v1/parts/{id}/reconciliation 对账",
+      "在途状态转换": "enums.py 状态机白名单 + services.py 守卫更新",
+      "部分装运签收": "ShipmentLine/ReceiptLine 逐行条件核销",
+      "失败补偿分录": "REJECT_RETURN / TIMEOUT_RETURN / RELEASE 分录携带 compensates_txn"
+    }
+  }
 }
